@@ -1,0 +1,18 @@
+# Build
+dist/
+
+# Dependencies
+node_modules/
+
+# Env
+.env
+.env.*
+
+# Logs
+*.log
+
+# SQLite
+*.sqlite
+
+# TypeScript incremental build info
+*.tsbuildinfo
