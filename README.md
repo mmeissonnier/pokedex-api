@@ -1,4 +1,4 @@
-# My Nest Project
+# Pokedex API
 
 A small [NestJS](https://nestjs.com) backend exposing a Pokédex (French data) over HTTP, backed by SQLite and TypeORM. The goal of the project is to practise building a NestJS API with a clean architecture.
 
@@ -21,18 +21,18 @@ The API listens on `http://localhost:3000`.
 
 ## Configuration
 
-| Variable        | Description                     | Example              |
-| --------------- | ------------------------------- | -------------------- |
+| Variable        | Description                      | Example             |
+| --------------- | -------------------------------- | ------------------- |
 | `DATABASE_PATH` | Path to the SQLite database file | `db/pokedex.sqlite` |
 
 Environment variables are loaded with Node's native `--env-file` flag (no extra dependency). The `start*` scripts in [package.json](package.json) already pass it.
 
 Non-environment settings are plain TypeScript constants in [src/config/](src/config/):
 
-| File                                                | Content                                      |
-| --------------------------------------------------- | -------------------------------------------- |
-| [pagination.config.ts](src/config/pagination.config.ts) | Default page size (20) and maximum (100)     |
-| [database.config.ts](src/config/database.config.ts)     | Reads and validates `DATABASE_PATH`          |
+| File                                                    | Content                                  |
+| ------------------------------------------------------- | ---------------------------------------- |
+| [pagination.config.ts](src/config/pagination.config.ts) | Default page size (20) and maximum (100) |
+| [database.config.ts](src/config/database.config.ts)     | Reads and validates `DATABASE_PATH`      |
 
 ## API
 
@@ -90,7 +90,11 @@ curl "http://localhost:3000/pokemons?limit=2&offset=1"
 Invalid parameters return a `400`:
 
 ```json
-{ "message": "limit must be an integer between 1 and 100", "error": "Bad Request", "statusCode": 400 }
+{
+  "message": "limit must be an integer between 1 and 100",
+  "error": "Bad Request",
+  "statusCode": 400
+}
 ```
 
 ## Database
@@ -131,16 +135,16 @@ File naming: `.entity.ts`, `.vo.ts`, `.repository.ts`, `.use-case.ts`, `.orm-ent
 
 ## Scripts
 
-| Command                | Description                                  |
-| ---------------------- | -------------------------------------------- |
-| `npm run start:dev`    | Start in watch mode, loading `.env`          |
-| `npm run start`        | Start once, loading `.env`                   |
-| `npm run build`        | Compile to `dist/`                           |
-| `npm run start:prod`   | Run the compiled app, loading `.env`         |
-| `npm run lint`         | Lint with [oxlint](https://oxc.rs)           |
-| `npm run format`       | Format with Prettier                         |
-| `npm test`             | Run unit tests with Vitest                   |
-| `npm run test:e2e`     | Run end-to-end tests                         |
+| Command              | Description                          |
+| -------------------- | ------------------------------------ |
+| `npm run start:dev`  | Start in watch mode, loading `.env`  |
+| `npm run start`      | Start once, loading `.env`           |
+| `npm run build`      | Compile to `dist/`                   |
+| `npm run start:prod` | Run the compiled app, loading `.env` |
+| `npm run lint`       | Lint with [oxlint](https://oxc.rs)   |
+| `npm run format`     | Format with Prettier                 |
+| `npm test`           | Run unit tests with Vitest           |
+| `npm run test:e2e`   | Run end-to-end tests                 |
 
 Type-check without emitting files: `npx tsc --noEmit` (`noEmit` is enabled in [tsconfig.json](tsconfig.json) and overridden in [tsconfig.build.json](tsconfig.build.json) so that `nest build` still outputs files).
 
