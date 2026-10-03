@@ -7,12 +7,14 @@ node_modules/
 # Env
 .env
 .env.*
+!.env.example
 
 # Logs
 *.log
 
 # SQLite
 *.sqlite
+!db/pokedex.sqlite
 
 # TypeScript incremental build info
 *.tsbuildinfo
