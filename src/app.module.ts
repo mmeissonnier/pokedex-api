@@ -7,6 +7,8 @@ import { PokemonSqliteRepository } from './infrastructure/pokemon-sqlite.reposit
 import { provideClass } from './infrastructure/nest/provide-class.js';
 import { PokemonOrmEntity } from './infrastructure/typeorm/pokemon.orm-entity.js';
 import { PokemonsController } from './presentation/pokemons.controller.js';
+import { BattlePredictionController } from './presentation/battle-prediction.controller.js';
+import { PredictBattle } from './application/predict-battle.use-case.js';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { PokemonsController } from './presentation/pokemons.controller.js';
     }),
     TypeOrmModule.forFeature([PokemonOrmEntity]),
   ],
-  controllers: [PokemonsController],
+  controllers: [PokemonsController, BattlePredictionController],
   providers: [
     { provide: PokemonRepository, useClass: PokemonSqliteRepository },
     provideClass(ListPokemons, [PokemonRepository]),
+    provideClass(PredictBattle, [PokemonRepository]),
   ],
 })
 export class AppModule {}
