@@ -8,4 +8,5 @@ import type { Pokemon } from './pokemon.entity.js';
  */
 export abstract class PokemonRepository {
   abstract findAll(pagination: Pagination): Promise<Page<Pokemon>>;
+  abstract findById(id: number): Promise<Pokemon | null>;
 }

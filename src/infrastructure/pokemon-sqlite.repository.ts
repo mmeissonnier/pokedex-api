@@ -22,4 +22,9 @@ export class PokemonSqliteRepository implements PokemonRepository {
     });
     return { items: rows.map(toDomain), total };
   }
+
+  async findById(id: number): Promise<Pokemon | null> {
+    const row = await this.orm.findOneBy({ id });
+    return row ? toDomain(row) : null;
+  }
 }
